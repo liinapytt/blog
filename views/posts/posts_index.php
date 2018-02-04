@@ -1,4 +1,4 @@
-<h1>Welcome!</h1>
+<!--<h1>Welcome!</h1>
 
 
 <p>This is the welcome controller's default view file. It is located at <code>/views/welcome/welcome_index.php</code>.
@@ -52,11 +52,42 @@ server by jQuery and server's response will be written to the box below.
 <p>Here is an example how to use traditional POST to send data to the server. Click Post after filling the form. The
     server will invoke <code>post::post_index()</code> action (which is in <code>/controllers/posts.php</code> file)
     which just dumps $_POST to the screen.</p>
-<!-- Button for executing post -->
+<!-- Button for executing post
 <form method="post">
     <input type="text" name="foobar"/>
     <input type="submit" value="Post"/>
-</form>
+</form> -->
+<div class="span8">
+    <?php foreach($posts as $post): ?>
+        <h1><?=$post['post_subject'] ?></h1>
+        <p><?=$post['post_text'] ?></p>
+        <div>
+            <span class="badge badge-success"><?=$post['post_created'] ?></span>
+            <div class="pull-right"><span class="label"><?=$post['user_id'] ?></span> <span class="label">story</span> <span class="label">blog</span>
+                <span class="label">personal</span></div>
+        </div>
+    <?php endforeach ?>
+</div>
+<div class="span8">
+    <h1>Alice in Wonderland, part dos</h1>
+    <p>'You ought to be ashamed of yourself for asking such a simple question,' added the Gryphon; and then they both sat silent and looked at poor Alice, who felt ready to sink into the earth. At last the Gryphon said to the Mock Turtle, 'Drive on, old fellow! Don't be all day about it!' and he went on in these words:
+        'Yes, we went to school in the sea, though you mayn't believe it—'
+        'I never said I didn't!' interrupted Alice.
+        'You did,' said the Mock Turtle.</p>
+    <div>
+        <span class="badge badge-success">Posted 2012-08-02 20:47:04</span><div class="pull-right"><span class="label">alice</span> <span class="label">story</span> <span class="label">blog</span> <span class="label">personal</span></div>
+    </div>
+    <!--
+    <hr>
+    <h1>Revolution has begun!</h1>
+    <p>'I am bound to Tahiti for more men.'
+        'Very good. Let me board you a moment—I come in peace.' With that he leaped from the canoe, swam to the boat; and climbing the gunwale, stood face to face with the captain.
+        'Cross your arms, sir; throw back your head. Now, repeat after me. As soon as Steelkilt leaves me, I swear to beach this boat on yonder island, and remain there six days. If I do not, may lightning strike me!'A pretty scholar,' laughed the Lakeman. 'Adios, Senor!' and leaping into the sea, he swam back to his comrades.</p>
+    <div>
+        <span class="badge badge-success">Posted 2012-08-02 20:47:04</span><div class="pull-right"><span class="label">alice</span> <span class="label">story</span> <span class="label">blog</span> <span class="label">personal</span></div>
+    </div>
+    <hr>
+</div>-->
 
 <!-- Code for ajax -->
 <script type="text/javascript">
