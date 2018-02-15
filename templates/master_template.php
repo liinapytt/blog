@@ -53,9 +53,10 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li <?= $controller == 'posts' ? 'class="active"' : '' ?>><a href="#">Home</a></li>
-                <li <?= $controller == 'halo' ? 'class="active"' : '' ?>><a href="halo">Halo admin</a></li>
-                <li class="dropdown">
+                <li <?= $controller == 'posts' ? 'class="active"' : '' ?>><a href="<?=BASE_URL?>">Posts</a></li>
+                <li <?= $controller == 'tags' ? 'class="active"' : '' ?>><a href="<?=BASE_URL?>tags">Tags</a></li>
+                <li <?= $controller == 'users' ? 'class="active"' : '' ?>><a href="<?=BASE_URL?>users">Users</a></li>
+               <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sample dropdown <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><? __('Action') ?></a></li>
@@ -64,7 +65,7 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Nav header</li>
                         <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>-->
                     </ul>
                 </li>
             </ul>
