@@ -14,6 +14,13 @@ class posts extends Controller
 
         $this->posts = get_all("SELECT * FROM post");
     }
+    /**
+     * Post view
+     */
+    function view(){
+    $post_id = $this->params[0];
+    $this->post = get_first("SELECT * FROM post NATURAL JOIN users WHERE post_id='$post_id'");
+    }
 
     /**
      * This function will only be ran in case of an AJAX request. No view will be attempted to load after this function.
@@ -46,9 +53,9 @@ class posts extends Controller
     /**
      * This function will only be ran in case of POST request
      */
-    function POST_index()
+    /*function POST_index()
     {
         echo "\$_POST:<br>";
         var_dump($_POST);
-    }
+    }*/
 }

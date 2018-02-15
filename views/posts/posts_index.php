@@ -59,7 +59,7 @@ server by jQuery and server's response will be written to the box below.
 </form> -->
 <div class="span8">
     <?php foreach($posts as $post): ?>
-        <h1><?=$post['post_subject'] ?></h1>
+        <h1><a href="<?=BASE_URL?>posts/view/<?=$post['post_id']?>"><?=$post['post_subject'] ?></a></h1>
         <p><?=$post['post_text'] ?></p>
         <div>
             <span class="badge badge-success"><?=$post['post_created'] ?></span>
@@ -68,6 +68,7 @@ server by jQuery and server's response will be written to the box below.
         </div>
     <?php endforeach ?>
 </div>
+<!--
 <div class="span8">
     <h1>Alice in Wonderland, part dos</h1>
     <p>'You ought to be ashamed of yourself for asking such a simple question,' added the Gryphon; and then they both sat silent and looked at poor Alice, who felt ready to sink into the earth. At last the Gryphon said to the Mock Turtle, 'Drive on, old fellow! Don't be all day about it!' and he went on in these words:
@@ -77,6 +78,7 @@ server by jQuery and server's response will be written to the box below.
     <div>
         <span class="badge badge-success">Posted 2012-08-02 20:47:04</span><div class="pull-right"><span class="label">alice</span> <span class="label">story</span> <span class="label">blog</span> <span class="label">personal</span></div>
     </div>
+    -->
     <!--
     <hr>
     <h1>Revolution has begun!</h1>
