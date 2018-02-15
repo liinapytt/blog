@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2018 at 01:27 PM
+-- Generation Time: Feb 15, 2018 at 02:06 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -37,7 +37,7 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`post_id`, `post_subject`, `post_text`, `post_created`, `user_id`) VALUES
-(1, 'Halo I postitus', 'Harjutame ise blogi loomist.', '2018-02-04 11:07:41', 1),
+(1, 'Halo I postitus', 'Harjutame ise blogi loomist. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2018-02-04 11:07:41', 1),
 (2, 'Halo II postitus', 'Vaatame, kas endiselt postitamine töötab.', '2018-02-04 12:14:03', NULL);
 
 -- --------------------------------------------------------
