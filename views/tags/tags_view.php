@@ -1,4 +1,3 @@
-
 <div class="span8">
     <?php foreach($posts as $post): ?>
         <h1><a href="<?=BASE_URL?>posts/view/<?=$post['post_id']?>"><?=$post['post_subject'] ?></a></h1>
@@ -10,19 +9,3 @@
         </div>
     <?php endforeach ?>
 </div>
-
-
-<!-- Code for ajax -->
-<script type="text/javascript">
-    function success() {
-        ajax("welcome/success", $("#ajax-form").serialize(), function (json) {
-            $(".result").html(json.data);
-        });
-    }
-
-    function error() {
-        ajax("welcome/error", $("#ajax-form").serialize(), function (json) {
-            $(".result").html(json.data);
-        });
-    }
-</script>
