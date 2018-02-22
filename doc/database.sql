@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2018 at 02:06 PM
+-- Generation Time: Feb 22, 2018 at 06:13 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -16,6 +16,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `blog`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `comment_id` int(10) UNSIGNED NOT NULL,
+  `comment_subject` varchar(255) DEFAULT NULL,
+  `comment_text` text,
+  `comment_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `comment_author` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`comment_id`, `comment_subject`, `comment_text`, `comment_created`, `comment_author`) VALUES
+(1, 'Küsimus', 'Miks järgneb esimesele ilusale emakeelsele lausele arusaamatu ladinakeelne jutuvada? Palun selgitust!', '2018-02-22 16:43:04', 'Onu Mati'),
+(2, 'Halleluujah', 'Lõpuks ometi üks asjalik postitus. Lihtne ja konkreetne! ', '2018-02-22 16:44:34', 'Milvi Moosivaras');
 
 -- --------------------------------------------------------
 
@@ -38,7 +61,68 @@ CREATE TABLE `post` (
 
 INSERT INTO `post` (`post_id`, `post_subject`, `post_text`, `post_created`, `user_id`) VALUES
 (1, 'Halo I postitus', 'Harjutame ise blogi loomist. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2018-02-04 11:07:41', 1),
-(2, 'Halo II postitus', 'Vaatame, kas endiselt postitamine töötab.', '2018-02-04 12:14:03', NULL);
+(2, 'Halo II postitus', 'Vaatame, kas endiselt postitamine töötab.', '2018-02-04 12:14:03', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `post_comments`
+--
+
+DROP TABLE IF EXISTS `post_comments`;
+CREATE TABLE `post_comments` (
+  `post_id` int(10) UNSIGNED NOT NULL,
+  `comment_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `post_comments`
+--
+
+INSERT INTO `post_comments` (`post_id`, `comment_id`) VALUES
+(1, 1),
+(2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `post_tags`
+--
+
+DROP TABLE IF EXISTS `post_tags`;
+CREATE TABLE `post_tags` (
+  `post_id` int(10) UNSIGNED NOT NULL,
+  `tag_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `post_tags`
+--
+
+INSERT INTO `post_tags` (`post_id`, `tag_id`) VALUES
+(2, 1),
+(1, 2),
+(2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tag`
+--
+
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE `tag` (
+  `tag_id` int(10) UNSIGNED NOT NULL,
+  `tag_name` varchar(25) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tag`
+--
+
+INSERT INTO `tag` (`tag_id`, `tag_name`) VALUES
+(1, 'html'),
+(2, 'php');
 
 -- --------------------------------------------------------
 
@@ -116,11 +200,37 @@ INSERT INTO `users` (`user_id`, `is_admin`, `password`, `email`, `deleted`, `nam
 --
 
 --
+-- Indexes for table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`comment_id`);
+
+--
 -- Indexes for table `post`
 --
 ALTER TABLE `post`
   ADD PRIMARY KEY (`post_id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `post_comments`
+--
+ALTER TABLE `post_comments`
+  ADD PRIMARY KEY (`post_id`,`comment_id`),
+  ADD KEY `post_comments_ibfk_2` (`comment_id`);
+
+--
+-- Indexes for table `post_tags`
+--
+ALTER TABLE `post_tags`
+  ADD KEY `post_id` (`post_id`),
+  ADD KEY `tag_id` (`tag_id`);
+
+--
+-- Indexes for table `tag`
+--
+ALTER TABLE `tag`
+  ADD PRIMARY KEY (`tag_id`);
 
 --
 -- Indexes for table `translations`
@@ -140,10 +250,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `comment_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
   MODIFY `post_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tag`
+--
+ALTER TABLE `tag`
+  MODIFY `tag_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `translations`
@@ -166,5 +288,19 @@ ALTER TABLE `users`
 --
 ALTER TABLE `post`
   ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `post_comments`
+--
+ALTER TABLE `post_comments`
+  ADD CONSTRAINT `post_comments_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
+  ADD CONSTRAINT `post_comments_ibfk_2` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`comment_id`);
+
+--
+-- Constraints for table `post_tags`
+--
+ALTER TABLE `post_tags`
+  ADD CONSTRAINT `post_tags_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
+  ADD CONSTRAINT `post_tags_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`);
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
